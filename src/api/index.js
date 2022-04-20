@@ -1,3 +1,5 @@
+import { API_URLS } from "../utils";
+
 const customFetch = async (url,{body,...customConfig})=>{
     const token = window.localStorage.getItem("LOCALSTORAGE_TOKEN_KEY");
     
@@ -23,21 +25,31 @@ const customFetch = async (url,{body,...customConfig})=>{
         const response = await fetch(url,config);
         const data = await response.json();
 
-        if ( response.status>=200 && response.sta<300){
+        if ( data.success){
             return {
                 data:data.data,
                 success:true
             }
         }
+        else{
+            throw new Error(data.message);
+        }
     }
     catch(error){
         console.log('Error in custom Fetch =>',error);
+        return {
+            message :error.message,
+            success:false
+        }
+        
     }
 
 }
 
 
 
-const getPost = ()=>{
-    return customFetch();
+export const getPost = (page =1 , limit =5)=>{
+    return customFetch(API_URLS.posts(page , limit),{
+        method :'GET'
+    });
 }
