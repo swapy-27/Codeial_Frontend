@@ -5,7 +5,8 @@ const customFetch = async (url,{body,...customConfig})=>{
     
     var headers = {
         'content-type' : 'application/json',
-        Accept : 'application/json'
+        Accept : 'application/json',
+        
     };
 
     if(token){

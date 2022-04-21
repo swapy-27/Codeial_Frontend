@@ -26,10 +26,10 @@ function App() {
     fetchPosts();
     
   }, []);
-  if (loading) {
+  // if (loading) {
 
-    return (<Loader />)
-  }
+  //   return (<Loader />)
+  // }
   return (
     <div className="App">
       <Home />
