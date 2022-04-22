@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import '../styles/App.css';
 import { getPost } from '../api';
-import Loader from './Loader';
+import {Loader,Navbar} from './index';
 import { Home } from '../pages';
 function App() {
 
@@ -32,6 +32,7 @@ function App() {
   // }
   return (
     <div className="App">
+      <Navbar   posts={posts}/>
       <Home />
     </div>
   );
