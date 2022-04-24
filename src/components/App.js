@@ -6,6 +6,8 @@ import { Loader, Navbar } from './index';
 import { Home } from '../pages';
 import { Login } from '../pages';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
 
   const [posts, setPost] = useState([]);
@@ -36,12 +38,13 @@ function App() {
     <div className="App">
 
       <Router>
-        <Navbar  />
+        <ToastContainer  />
+        <Navbar />
 
         <Routes>
 
-          <Route exact path='/' element={<Home posts={posts}/>}/> 
-          <Route exact path='/login' element={<Login />}/>
+          <Route exact path='/' element={<Home posts={posts} />} />
+          <Route exact path='/login' element={<Login />} />
 
         </Routes>
 
