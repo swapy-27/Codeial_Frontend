@@ -1,29 +1,33 @@
 import styles from '../styles/home.module.css';
 import { Comments } from '../components';
-const Home = ({ posts }) => {
+const Home = (props) => {
+  const posts = props.posts;
+  console.log(posts)
   return (
     <div className={styles.postsList}>
-      {/* {posts.map((post) => ( */}
+      {posts.map((post) => {
+        const comments = post.comments;
+        return(
         <div className={styles.postWrapper}>
           <div className={styles.postHeader}>
             <div className={styles.postAvatar}>
-            <i class="fa-solid fa-user"></i>
+              <i class="fa-solid fa-user"></i>
               <div>
-                <span className={styles.postAuthor}></span>
+                <span className={styles.postAuthor}>{post.user.name}</span>
                 <span className={styles.postTime}>a minute ago</span>
               </div>
             </div>
-            <div className={styles.postContent}></div>
+            <div className={styles.postContent}>{post.content}</div>
 
             <div className={styles.postActions}>
               <div className={styles.postLike}>
-              <i class="fa-regular fa-heart"></i>
-                <span>5</span>
+                <i class="fa-regular fa-heart"></i>
+                <span>{(post.likes).length}</span>
               </div>
 
               <div className={styles.postCommentsIcon}>
-              <i class="fa-regular fa-message"></i>
-                <span>2</span>
+                <i class="fa-regular fa-message"></i>
+                <span>{comments.length}</span>
               </div>
             </div>
             <div className={styles.postCommentBox}>
@@ -31,12 +35,17 @@ const Home = ({ posts }) => {
             </div>
 
             <div className={styles.postCommentsList}>
-              <Comments/>
+              {comments.map((comment) => {
+                return ( <Comments comment={comment}/>)
+              })
+            }
+              
             </div>
           </div>
         </div>
-      
-      {/* } */}
+        )
+      }
+      )}
     </div>
   );
 };

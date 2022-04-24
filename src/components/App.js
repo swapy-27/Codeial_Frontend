@@ -20,7 +20,7 @@ function App() {
     const fetchPosts = async () => {
 
       const posts = await getPost();
-
+      
       if (posts.success) {
         setPost(posts.data.posts);
         setLoading(false);
@@ -30,10 +30,10 @@ function App() {
     fetchPosts();
 
   }, []);
-  // if (loading) {
+  if (loading) {
 
-  //   return (<Loader />)
-  // }
+    return (<Loader />)
+  }
   return (
     <div className="App">
 
