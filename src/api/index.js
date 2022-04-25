@@ -55,3 +55,14 @@ export const getPost = (page =1 , limit =5)=>{
         
     });
 }
+
+
+export const loginForm = (email,password)=>{
+    return customFetch(API_URLS.login(),{
+        method:'POST',
+        body : {
+            email,
+            password
+        }
+    })
+}

@@ -1,23 +1,33 @@
 import { useState } from 'react';
 import styles from '../styles/login.module.css';
 import {notify} from '../utils/toastify'
-
+import {loginForm} from '../api/index';
 const Login = () => {
 
   const [email,setEmail]= useState('');
   const [password,setPassword] = useState('');
   const [loggingIn, setLoggingIn] = useState(false);
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault();
 
     setLoggingIn(true);
     
     if(!password || !email){
-      console.log('missing')
-      notify('hey something is missing !')
+      notify('hey something is missing !');
+      return;
     }
-    console.log('hey')
+
+    const response = await loginForm(email,password);
+
+    if (response.success){
+       notify('Successfully Logged In!')
+        return;
+      }
+    else{
+      notify(response.message);
+      return;
+    }
   }
 
 
