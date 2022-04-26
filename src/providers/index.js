@@ -7,6 +7,8 @@ export const useProvideAuth = () =>{
 
     const login =(email,password) =>{};
     const logout = ()=>{};
+
+    
     return {
         user,
         login,
