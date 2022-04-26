@@ -2,11 +2,13 @@ import { useState } from 'react';
 import styles from '../styles/login.module.css';
 import {notify} from '../utils/toastify'
 import {loginForm} from '../api/index';
+import { useAuth } from '../providers';
 const Login = () => {
 
   const [email,setEmail]= useState('');
   const [password,setPassword] = useState('');
   const [loggingIn, setLoggingIn] = useState(false);
+  const auth = useAuth();
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
@@ -18,7 +20,7 @@ const Login = () => {
       return;
     }
 
-    const response = await loginForm(email,password);
+    const response = await auth.login(email,password);
 
     if (response.success){
        notify('Successfully Logged In!')

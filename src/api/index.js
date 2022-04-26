@@ -1,66 +1,66 @@
 import { API_URLS, getFormBody } from "../utils";
 
-const customFetch = async (url,{body,...customConfig})=>{
+const customFetch = async (url, { body, ...customConfig }) => {
     const token = window.localStorage.getItem("LOCALSTORAGE_TOKEN_KEY");
-    
+
     var headers = {
-        'content-type' : 'application/x-www-form-urlencoded',
-        Accept : 'application/json',
-        
+        'content-type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
+
     };
 
-    if(token){
+    if (token) {
         headers.Authentication = `Bearer ${token}`
     }
     var config = {
         ...customConfig,
-        headers:{
+        headers: {
             ...headers,
             ...customConfig.headers
         }
-    } 
-    if(body){
-        config.body=getFormBody(body);
     }
-    try{
-        const response = await fetch(url,config);
+    if (body) {
+        config.body = getFormBody(body);
+    }
+    try {
+        const response = await fetch(url, config);
         const data = await response.json();
 
-        if ( data.success){
+        if (data.success) {
             return {
-                data:data.data,
-                success:true
+                data: data.data,
+                success: true
             }
         }
-        else{
+        else {
             throw new Error(data.message);
         }
     }
-    catch(error){
-        console.log('Error in custom Fetch =>',error);
+    catch (error) {
+        console.log('Error in custom Fetch =>', error);
         return {
-            message :error.message,
-            success:false
+            message: error.message,
+            success: false
         }
-        
+
     }
 
 }
 
 
 
-export const getPost = (page =1 , limit =5)=>{
-    return customFetch(API_URLS.posts(page , limit),{
-        method :'GET',
-        
+export const getPost = (page = 1, limit = 5) => {
+    return customFetch(API_URLS.posts(page, limit), {
+        method: 'GET',
+
     });
 }
 
 
-export const loginForm = (email,password)=>{
-    return customFetch(API_URLS.login(),{
-        method:'POST',
-        body : {
+export const loginForm = (email, password) => {
+    return customFetch(API_URLS.login(), {
+        method: 'POST',
+        body: {
             email,
             password
         }
