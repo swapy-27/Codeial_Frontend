@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from '../styles/navbar.module.css'
 
 const Navbar = () => {
@@ -14,9 +15,9 @@ const Navbar = () => {
   
         <div className={styles.rightNav}>
           <div className={styles.user}>
-            <a href="/">
+            <Link to='/settings'  >
             <i class="fa-solid fa-user"></i>
-            </a>
+           </Link>
             <span>Aakash</span>
           </div>
   

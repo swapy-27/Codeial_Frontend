@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import '../styles/App.css';
 import { getPost } from '../api';
 import { Loader, Navbar } from './index';
-import { Home } from '../pages';
+import { Home, Settings } from '../pages';
 import { Login } from '../pages';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -45,7 +45,7 @@ function App() {
 
           <Route exact path='/' element={<Home posts={posts} />} />
           <Route exact path='/login' element={<Login />} />
-
+          <Route exact path='/settings' element={<Settings />} />
         </Routes>
 
       </Router>

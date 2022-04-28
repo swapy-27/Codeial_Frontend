@@ -2,7 +2,7 @@ import styles from '../styles/home.module.css';
 import { Comments } from '../components';
 const Home = (props) => {
   const posts = props.posts;
-  console.log(posts)
+  
   return (
     <div className={styles.postsList}>
       {posts.map((post) => {
