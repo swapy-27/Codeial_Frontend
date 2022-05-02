@@ -1,7 +1,8 @@
+import { useAuth } from '../providers';
 import styles from '../styles/settings.module.css'
 
 const Settings = () =>{
-
+    const auth = useAuth();
     return (
 
         <div className={styles.settings}>

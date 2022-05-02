@@ -24,13 +24,13 @@ const Navbar = () => {
           <div className={styles.navLinks}>
             <ul>
               <li>
-                <a href="/">Log in</a>
+                <Link to='/login' >Log in</Link>
               </li>
               <li>
                 <a href="/">Log out</a>
               </li>
               <li>
-                <a href="/">Register</a>
+              <Link to='/register' >Register</Link>
               </li>
             </ul>
           </div>

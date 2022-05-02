@@ -66,3 +66,15 @@ export const loginForm = (email, password) => {
         }
     })
 }
+
+export const userRegistration = (userName,email,password,confirmPassword)=>{
+    return customFetch(API_URLS.signup(),{
+        method:'POST',
+        body:{
+            name:userName,
+            email,
+            password,
+            confirmPassword
+        }
+    })
+}
