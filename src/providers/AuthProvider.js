@@ -1,4 +1,4 @@
-import { useProvideAuth } from ".";
+import { useProvideAuth } from "./index";
 
 import { createContext } from "react";
 
