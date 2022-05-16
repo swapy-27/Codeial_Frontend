@@ -2,7 +2,7 @@ import { useState } from 'react';
 // import { useToasts } from 'react-toast-notifications';
 
 import styles from '../styles/login.module.css';
-import { useAuth } from '../providers/index';
+import { useAuth } from '../hooks/index';
 
 const Login = () => {
   const [email, setEmail] = useState('');

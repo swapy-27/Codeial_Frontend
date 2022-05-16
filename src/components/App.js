@@ -39,7 +39,7 @@ function App() {
     <div className="App">
 
       <Router>
-        <ToastContainer  />
+        
         <Navbar />
 
         <Routes>
