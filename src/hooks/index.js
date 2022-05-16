@@ -54,7 +54,7 @@ export const useProvideAuth = () => {
   };
 
   const signup = async (name, email, password, confirmPassword) => {
-      console.log(name, email, password, confirmPassword)
+      
     const response = await userRegistration(name, email, password, confirmPassword);
     console.log(response)
     if (response.success) {

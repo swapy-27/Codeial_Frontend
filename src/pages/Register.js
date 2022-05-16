@@ -23,7 +23,7 @@ const Register = () => {
 
         await userRegistration(name,email,password,confirmPassword)
         .then((e)=>{
-            console.log(e)
+          
             notify(e.message)
             console.log(e.data)
         }

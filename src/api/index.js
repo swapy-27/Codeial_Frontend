@@ -75,7 +75,7 @@ export const userRegistration = (userName,email,password,confirmPassword)=>{
             name:userName,
             email,
             password,
-            confirmPassword
+            confirm_password:confirmPassword
         }
     })
 }
