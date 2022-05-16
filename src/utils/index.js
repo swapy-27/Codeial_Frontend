@@ -1,7 +1,7 @@
 export * from '../utils/constants';
 
 export const getFormBody = (params) => {
-  console.log(params)
+  
   let formBody = [];
 
   for (let property in params) {

@@ -58,7 +58,7 @@ export const getPost = (page = 1, limit = 5) => {
 
 
 export const login = async (email, password) => {
-    console.log(email,password)
+
     return await customFetch(API_URLS.login(), {
         method: 'POST',
         body: {

@@ -33,11 +33,12 @@ export const useProvideAuth = () => {
   // }, []);
 
   const login = async (email, password) => {
-    console.log(email,password)
+   
     const response = await userLogin(email, password);
-
+    console.log(response.data)
     if (response.success) {
       setUser(response.data.user);
+     
       // setItemInLocalStorage(
       //   LOCALSTORAGE_TOKEN_KEY,
       //   response.data.token ? response.data.token : null
@@ -56,7 +57,7 @@ export const useProvideAuth = () => {
   const signup = async (name, email, password, confirmPassword) => {
       
     const response = await userRegistration(name, email, password, confirmPassword);
-    console.log(response)
+    
     if (response.success) {
       return {
         success: true,

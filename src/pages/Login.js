@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { useToasts } from 'react-toast-notifications';
+import { notify } from '../utils/toastify';
 
 import styles from '../styles/login.module.css';
 import { useAuth } from '../hooks/index';
@@ -8,37 +8,27 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggingIn, setLoggingIn] = useState(false);
-  // const { addToast } = useToasts();
-  const auth = useAuth();
-  console.log(auth);
 
-  const handleSubmit =  (e) => {
+  const auth = useAuth();
+
+  const  userLogin = auth.login;
+
+  const handleSubmit =  async (e) => {
     e.preventDefault();
     setLoggingIn(true);
 
     if (!email || !password) {
-      // return addToast('Please enter both email and password', {
-      //   appearance: 'error',
-      // });
+      return notify('Please enter both email and password');
     }
 
-    const response =  auth.login(email, password);
-     console.log(response)
+    const response =   await userLogin(email, password);
+     
     if (response.success) {
-      console.log('hey !')
+      notify('Successfully logged in')
     } else {
-     console.log('error')
+      notify(response.message)
     }
-    // if (response.success) {
-    //   addToast('Successfully logged in', {
-    //     appearance: 'success',
-    //   });
-    // } else {
-    //   addToast(response.message, {
-    //     appearance: 'error',
-    //   });
-    // }
-
+  
     setLoggingIn(false);
   };
 
