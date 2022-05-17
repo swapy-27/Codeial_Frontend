@@ -25,6 +25,7 @@ const Login = () => {
      
     if (response.success) {
       notify('Successfully logged in')
+      
     } else {
       notify(response.message)
     }

@@ -15,7 +15,7 @@ export const getFormBody = (params) => {
 }
 
 
-export const setItemsInLocalStorage = (key, value) => {
+export const setItemInLocalStorage = (key, value) => {
   if (!key || !value) {
     return console.error('can not store in LS');
   }
@@ -25,7 +25,7 @@ export const setItemsInLocalStorage = (key, value) => {
   localStorage.setItem(valueToStore);
 }
 
-export const getItemsInLocalStorage = (key) => {
+export const getItemInLocalStorage = (key) => {
 
   if (!key) {
     return console.error('can not get value from  LS');
@@ -34,7 +34,7 @@ export const getItemsInLocalStorage = (key) => {
   return localStorage.getItem(key);
 }
 
-export const removeItemsInLocalStorage = (key) => {
+export const removeItemInLocalStorage = (key) => {
   
   if (!key) {
     return console.error('can not remove value from LS');
