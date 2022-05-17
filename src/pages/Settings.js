@@ -1,4 +1,4 @@
-import { useAuth } from '../providers';
+import { useAuth } from '../hooks';
 import styles from '../styles/settings.module.css'
 import { useState } from 'react';
 import { notify } from '../utils/toastify';
@@ -46,13 +46,13 @@ const Settings = () => {
             setSavingForm(false);
             cleaForm();
 
-            return notify ( 'user updated successfully')
+            return notify('user updated successfully')
         }
-        else{
+        else {
             notify(response.message)
             setSavingForm(false);
         }
-       
+
     }
 
     return (
