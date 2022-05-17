@@ -15,6 +15,46 @@ const Settings = () => {
     const auth = useAuth();
 
 
+    const cleaForm = () => {
+        setConfirmPassword('');
+        setPassword('');
+    }
+    const updateProfile = async () => {
+        setSavingForm(true);
+        let error = false;
+        if (!name || !password || !confirmPassword) {
+            notify('Please fill in all the fields');
+            error = true;
+        }
+
+        if (confirmPassword !== password) {
+            notify('password and confirm password not matches');
+            error = true;
+        }
+
+        if (error) {
+            return setSavingForm(false)
+        }
+
+        const response = await auth.updateUser(
+            auth.user._id, name, password, confirmPassword
+        );
+
+        if (response.success) {
+
+            setEditMode(false);
+            setSavingForm(false);
+            cleaForm();
+
+            return notify ( 'user updated successfully')
+        }
+        else{
+            notify(response.message)
+            setSavingForm(false);
+        }
+       
+    }
+
     return (
 
         <div className={styles.settings}>

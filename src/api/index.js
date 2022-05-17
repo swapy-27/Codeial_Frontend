@@ -68,8 +68,8 @@ export const login = async (email, password) => {
     })
 }
 
-export const userRegistration = (userName,email,password,confirmPassword)=>{
-    return customFetch(API_URLS.signup(),{
+export const userRegistration =  async (userName,email,password,confirmPassword)=>{
+    return await customFetch(API_URLS.signup(),{
         method:'POST',
         body:{
             name:userName,
@@ -79,3 +79,16 @@ export const userRegistration = (userName,email,password,confirmPassword)=>{
         }
     })
 }
+
+export const editProfile =async (userId , name,password,confirmPassword)=>{
+    return await customFetch(API_URLS.signup(),{
+        method:'POST',
+        body:{
+            id:userId,
+            name,
+            password,
+            confirm_password:confirmPassword
+        }
+    })
+}
+
