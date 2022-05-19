@@ -79,7 +79,8 @@ export const useProvideAuth = () => {
   };
 
   const updateUser = async (userId, name, password, confirmPassword) => {
-    const response = editProfile(userId, name, password, confirmPassword);
+
+    const response = await editProfile(userId, name, password, confirmPassword);
 
     setItemInLocalStorage(
       LOCALSTORAGE_TOKEN_KEY,
