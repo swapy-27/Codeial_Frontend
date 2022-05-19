@@ -3,12 +3,31 @@ import { useEffect, useState } from 'react';
 import '../styles/App.css';
 import { getPost } from '../api';
 import { Loader, Navbar } from './index';
-import { Home, Settings,Register } from '../pages';
+import { Home, Settings, Register,UserProfile } from '../pages';
 import { Login } from '../pages';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 
+import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from '../hooks';
+import { render } from '@testing-library/react';
+function PrivateRoute({ children, ...rest }) {
+  const navigate = useNavigate();
+  const auth = useAuth();
+  return (
+    <Route
+      {...rest}
+
+      render={() => {
+        if (auth.user) {
+          return children;
+        }
+        return navigate('/login')
+      }}
+
+
+    />
+  )
+}
 function App() {
 
   const [posts, setPost] = useState([]);
@@ -21,7 +40,7 @@ function App() {
     const fetchPosts = async () => {
 
       const posts = await getPost();
-      
+
       if (posts.success) {
         setPost(posts.data.posts);
         setLoading(false);
@@ -39,15 +58,26 @@ function App() {
     <div className="App">
 
       <Router>
-        
+
         <Navbar />
 
         <Routes>
 
           <Route exact path='/' element={<Home posts={posts} />} />
           <Route exact path='/login' element={<Login />} />
-          <Route exact path='/settings' element={<Settings />} />
-          <Route exact path='/register' element={<Register/>}/>
+
+          <PrivateRoute exact path='/register'>
+            <Register />
+          </PrivateRoute>
+          <PrivateRoute exact path='/register'>
+            <Register />
+          </PrivateRoute>
+          <PrivateRoute exact path='/settings'>
+            <Settings />
+          </PrivateRoute>
+          <PrivateRoute exact path="/user/:userId">
+            <UserProfile />
+          </PrivateRoute>
         </Routes>
 
       </Router>

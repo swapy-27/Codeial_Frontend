@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { notify } from '../utils/toastify';
-
+import { useNavigate } from "react-router-dom";
 import styles from '../styles/login.module.css';
 import { useAuth } from '../hooks/index';
 
@@ -12,7 +12,7 @@ const Login = () => {
   const auth = useAuth();
 
   const  userLogin = auth.login;
-
+  const navigate = useNavigate();
   const handleSubmit =  async (e) => {
     e.preventDefault();
     setLoggingIn(true);
@@ -32,7 +32,9 @@ const Login = () => {
   
     setLoggingIn(false);
   };
-
+  if(auth.user){
+    navigate('/');
+  }
   return (
     <form className={styles.loginForm} onSubmit={handleSubmit}>
       <span className={styles.loginSignupHeader}>Log In</span>
