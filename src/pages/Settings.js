@@ -39,7 +39,7 @@ const Settings = () => {
         const response = await auth.updateUser(
             auth.user._id, name, password, confirmPassword
         );
-
+           
         if (response.success) {
 
             setEditMode(false);
@@ -59,7 +59,7 @@ const Settings = () => {
 
         <div className={styles.settings}>
             <div className={styles.imgContainer}>
-                <i class="fa-solid fa-gears"></i>
+            <i class="fa-solid fa-user"></i>
             </div>
 
             <div className={styles.field}>

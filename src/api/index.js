@@ -81,7 +81,7 @@ export const userRegistration =  async (userName,email,password,confirmPassword)
 }
 
 export const editProfile =async (userId , name,password,confirmPassword)=>{
-    return await customFetch(API_URLS.signup(),{
+    return await customFetch(API_URLS.editUser(),{
         method:'POST',
         body:{
             id:userId,

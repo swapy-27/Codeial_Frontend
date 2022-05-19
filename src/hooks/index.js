@@ -5,6 +5,8 @@ import jwt from 'jwt-decode';
 import { AuthContext } from '../providers/AuthProvider';
 import { editProfile, login as userLogin } from '../api';
 import { userRegistration } from '../api';
+
+
 import {
   setItemInLocalStorage,
   LOCALSTORAGE_TOKEN_KEY,
@@ -37,6 +39,7 @@ export const useProvideAuth = () => {
     const response = await userLogin(email, password);
 
     if (response.success) {
+      console.log(response.data)
       setUser(response.data.user);
 
       setItemInLocalStorage(
@@ -77,6 +80,11 @@ export const useProvideAuth = () => {
 
   const updateUser = async (userId, name, password, confirmPassword) => {
     const response = editProfile(userId, name, password, confirmPassword);
+
+    setItemInLocalStorage(
+      LOCALSTORAGE_TOKEN_KEY,
+      response.data.token ? response.data.token : null
+    );
 
     if (response.success) {
       setUser(response.data.user)

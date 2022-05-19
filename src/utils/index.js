@@ -22,7 +22,7 @@ export const setItemInLocalStorage = (key, value) => {
 
   const valueToStore = typeof (value) !== String ? JSON.stringify(value) : value;
 
-  localStorage.setItem(valueToStore);
+  localStorage.setItem(key,valueToStore);
 }
 
 export const getItemInLocalStorage = (key) => {
@@ -39,6 +39,6 @@ export const removeItemInLocalStorage = (key) => {
   if (!key) {
     return console.error('can not remove value from LS');
   }
-
+  
   localStorage.removeItem(key);
 }

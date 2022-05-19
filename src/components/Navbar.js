@@ -15,12 +15,13 @@ const Navbar = () => {
       </div>
 
       <div className={styles.rightNav}>
-        <div className={styles.user}>
+        {auth.user && ( <div className={styles.user}>
           <Link to='/settings'  >
             <i class="fa-solid fa-user"></i>
           </Link>
           <span>{auth.user.name}</span>
-        </div>
+        </div>)}
+       
 
         <div className={styles.navLinks}>
           <ul>
