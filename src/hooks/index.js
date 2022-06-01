@@ -27,7 +27,7 @@ export const useProvideAuth = () => {
 
     if (userToken) {
       const user = jwt(userToken);
-
+     
       setUser(user);
     }
 

@@ -1,55 +1,52 @@
-import { API_URLS, getFormBody } from "../utils";
-import { LOCALSTORAGE_TOKEN_KEY } from "../utils";
+import { API_URLS, getFormBody ,LOCALSTORAGE_TOKEN_KEY} from "../utils";
+
+
 const customFetch = async (url, { body, ...customConfig }) => {
-
-
-    let token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
-    token = JSON.parse(token);
-    
-    console.log('this is from api index.js',token);
-    var headers = {
-        'content-type': 'application/x-www-form-urlencoded',
-        Accept: 'application/json',
-
+    var  token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
+    token = JSON.parse(token)
+    console.log(token)
+    const headers = {
+      'content-type': 'application/x-www-form-urlencoded',
     };
-
+  
     if (token) {
-        headers.Authentication = `Bearer ${token}`
+      headers.Authorization = `Bearer ${token}`;
     }
-    var config = {
-        ...customConfig,
-        headers: {
-            ...headers,
-            ...customConfig.headers
-        }
-    }
+  
+    const config = {
+      ...customConfig,
+      headers: {
+        ...headers,
+        ...customConfig.headers,
+      },
+    };
+    
     if (body) {
-        config.body = getFormBody(body);
+      config.body = getFormBody(body);
     }
+  
     try {
-        const response = await fetch(url, config);
-        const data = await response.json();
-
-        if (data.success) {
-            return {
-                data: data.data,
-                success: true
-            }
-        }
-        else {
-            throw new Error(data.message);
-        }
-    }
-    catch (error) {
-        console.log('Error in custom Fetch =>', error);
+     
+      const response = await fetch(url, config);
+      const data = await response.json();
+  
+      if (data.success) {
         return {
-            message: error.message,
-            success: false
-        }
-
+          data: data.data,
+          success: true,
+        };
+      }
+  
+      throw new Error(data.message);
+    } catch (error) {
+      console.error('error');
+      return {
+        message: error.message,
+        success: false,
+      };
     }
-
-}
+  };
+  
 
 
 
@@ -72,27 +69,35 @@ export const login = async (email, password) => {
     })
 }
 
-export const userRegistration =  async (userName,email,password,confirmPassword)=>{
-    return await customFetch(API_URLS.signup(),{
-        method:'POST',
-        body:{
-            name:userName,
+export const userRegistration = async (userName, email, password, confirmPassword) => {
+    return await customFetch(API_URLS.signup(), {
+        method: 'POST',
+        body: {
+            name: userName,
             email,
             password,
-            confirm_password:confirmPassword
+            confirm_password: confirmPassword
         }
     })
 }
 
-export const editProfile =async (userId , name,password,confirmPassword)=>{
-    return await customFetch(API_URLS.editUser(),{
-        method:'POST',
-        body:{
-            id:userId,
+export const editProfile = async (userId, name, password, confirmPassword) => {
+    return await customFetch(API_URLS.editUser(), {
+        method: 'POST',
+        body: {
+            id: userId,
             name,
             password,
-            confirm_password:confirmPassword
+            confirm_password: confirmPassword
         }
     })
+}
+
+export const fetchUserProfile = async (userId) => {
+    return await customFetch(API_URLS.userInfo(userId), {
+        method: 'GET',
+
+    })
+   
 }
 

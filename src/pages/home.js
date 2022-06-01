@@ -1,11 +1,14 @@
 import styles from '../styles/home.module.css';
 import { Comments } from '../components';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const Home = (props) => {
   const posts = props.posts;
-  
+  const navigate = useNavigate();
   return (
     <div className={styles.postsList}>
       {posts.map((post) => {
+       
         const comments = post.comments;
         return(
         <div className={styles.postWrapper}>
@@ -13,7 +16,9 @@ const Home = (props) => {
             <div className={styles.postAvatar}>
               <i class="fa-solid fa-user"></i>
               <div>
-                <span className={styles.postAuthor}>{post.user.name}</span>
+                {/* <Link to={`/user/${post.user._id}`}><span className={styles.postAuthor}>{post.user.name}</span></Link> */}
+                <span onClick={()=>{ return navigate(`/user/${post.user._id}`)}} className={styles.postAuthor}>{post.user.name}</span>
+                
                 <span className={styles.postTime}>a minute ago</span>
               </div>
             </div>
