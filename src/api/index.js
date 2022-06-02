@@ -1,9 +1,9 @@
-import { API_URLS, getFormBody ,LOCALSTORAGE_TOKEN_KEY} from "../utils";
+import { API_URLS, getFormBody, LOCALSTORAGE_TOKEN_KEY } from "../utils";
 
 const customFetch = async (url, { body, ...customConfig }) => {
   let token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
   token = JSON.parse(token);
-  console.log("this is from api index.js", token);
+
   var headers = {
     "content-type": "application/x-www-form-urlencoded",
     Accept: "application/json",
@@ -49,53 +49,75 @@ const customFetch = async (url, { body, ...customConfig }) => {
 
 
 export const getPost = (page = 1, limit = 5) => {
-    return customFetch(API_URLS.posts(page, limit), {
-        method: 'GET',
+  return customFetch(API_URLS.posts(page, limit), {
+    method: 'GET',
 
-    });
+  });
 }
 
 
 export const login = async (email, password) => {
 
-    return await customFetch(API_URLS.login(), {
-        method: 'POST',
-        body: {
-            email,
-            password
-        }
-    })
+  return await customFetch(API_URLS.login(), {
+    method: 'POST',
+    body: {
+      email,
+      password
+    }
+  })
 }
 
 export const userRegistration = async (userName, email, password, confirmPassword) => {
-    return await customFetch(API_URLS.signup(), {
-        method: 'POST',
-        body: {
-            name: userName,
-            email,
-            password,
-            confirm_password: confirmPassword
-        }
-    })
+  return await customFetch(API_URLS.signup(), {
+    method: 'POST',
+    body: {
+      name: userName,
+      email,
+      password,
+      confirm_password: confirmPassword
+    }
+  })
 }
 
 export const editProfile = async (userId, name, password, confirmPassword) => {
-    return await customFetch(API_URLS.editUser(), {
-        method: 'POST',
-        body: {
-            id: userId,
-            name,
-            password,
-            confirm_password: confirmPassword
-        }
-    })
+  return await customFetch(API_URLS.editUser(), {
+    method: 'POST',
+    body: {
+      id: userId,
+      name,
+      password,
+      confirm_password: confirmPassword
+    }
+  })
 }
 
 export const fetchUserProfile = async (userId) => {
-    return await customFetch(API_URLS.userInfo(userId), {
-        method: 'GET',
+  return await customFetch(API_URLS.userInfo(userId), {
+    method: 'GET',
 
-    })
-   
+  })
+
 }
 
+export const fetchUserFreinds= async (userId) => {
+  return await customFetch(API_URLS.friends(userId), {
+    method: 'GET',
+
+  })
+
+}
+export const addFriend= async (userId) => {
+  return await customFetch(API_URLS.createFriendship(userId), {
+    method: 'POST',
+
+  })
+
+}
+
+export const removeFriend= async (userId) => {
+  return await customFetch(API_URLS.removeFriend(userId), {
+    method: 'POST',
+
+  })
+
+}
