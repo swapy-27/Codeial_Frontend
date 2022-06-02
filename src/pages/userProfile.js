@@ -36,7 +36,7 @@ const UserProfile = () => {
         }
 
          getUser();
-    })
+    },[userId,navigate])
 
 
     return (

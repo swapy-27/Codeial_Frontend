@@ -63,9 +63,9 @@ function App() {
 
           <Route exact path='/register' element={<Register />} />
 
-          <Route exact path='/settings' element={<PrivateRoute exact path='/settings'><Settings /></PrivateRoute>} />
+          <Route exact path='/settings' element={<PrivateRoute ><Settings /></PrivateRoute>} />
 
-          <Route exact path='/user/:userId' element={<PrivateRoute exact path='"/user/:userId"'><UserProfile /></PrivateRoute>} />
+          <Route exact path='/user/:userId' element={<PrivateRoute ><UserProfile /></PrivateRoute>} />
 
         </Routes>
 

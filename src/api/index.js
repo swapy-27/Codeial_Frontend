@@ -1,52 +1,50 @@
 import { API_URLS, getFormBody ,LOCALSTORAGE_TOKEN_KEY} from "../utils";
 
-
 const customFetch = async (url, { body, ...customConfig }) => {
-    var  token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
-    token = JSON.parse(token)
-    console.log(token)
-    const headers = {
-      'content-type': 'application/x-www-form-urlencoded',
-    };
-  
-    if (token) {
-      headers.Authorization = `Bearer ${token}`;
-    }
-  
-    const config = {
-      ...customConfig,
-      headers: {
-        ...headers,
-        ...customConfig.headers,
-      },
-    };
-    
-    if (body) {
-      config.body = getFormBody(body);
-    }
-  
-    try {
-     
-      const response = await fetch(url, config);
-      const data = await response.json();
-  
-      if (data.success) {
-        return {
-          data: data.data,
-          success: true,
-        };
-      }
-  
-      throw new Error(data.message);
-    } catch (error) {
-      console.error('error');
+  let token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
+  token = JSON.parse(token);
+  console.log("this is from api index.js", token);
+  var headers = {
+    "content-type": "application/x-www-form-urlencoded",
+    Accept: "application/json",
+  };
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const config = {
+    ...customConfig,
+    headers: {
+      ...headers,
+      ...customConfig.headers,
+    },
+  };
+
+  if (body) {
+    config.body = getFormBody(body);
+  }
+
+  try {
+    const response = await fetch(url, config);
+    const data = await response.json();
+
+    if (data.success) {
       return {
-        message: error.message,
-        success: false,
+        data: data.data,
+        success: true,
       };
     }
-  };
-  
+
+    throw new Error(data.message);
+  } catch (error) {
+    console.error("error");
+    return {
+      message: error.message,
+      success: false,
+    };
+  }
+};
 
 
 
